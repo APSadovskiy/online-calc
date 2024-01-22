@@ -1,19 +1,25 @@
-const db =require('../db')
+const db = require('../db')
 
 class User_projectsController {
 	async createUser_projects(req, res) {
-try {
-			const {name_text, id_user}=req.body
+		try {
+			const { name_text, id_user } = req.body
 			const newUser_projects = await db.query(`INSERT INTO public.users_projects (name_text, id_user)
 			 VALUES ($1, $2) RETURNING *`, [name_text, id_user])
 			console.log(name_text, id_user);
 			res.json(newUser_projects.rows[0])
-} catch (e) {
-	console.log(e);
-}
+		} catch (e) {
+			console.log(e);
+		}
 
 	}
 	async getUser_projects(req, res) {
+		try {
+			const getUser_projects = await db.query(`SELECT * FROM public.users_projects`)
+			res.json(getUser_projects.rows)
+		} catch (e) {
+			console.log(e);
+		}
 
 	}
 	async getOneUser_projects(req, res) {

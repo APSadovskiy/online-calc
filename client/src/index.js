@@ -1,7 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { createContext } from 'react';
+/* import ReactDOM from 'react-dom'; */
 import App from './App';
-import { TabulatorFull as Tabulator } from 'tabulator-tables';
+import UserStore from './store/UserStore';
+import UserProjectsStore from './store/UserProjectsStore';
+/* --------------- */
+import { createRoot } from 'react-dom/client';
+const container = document.getElementById('root');
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+
+export const Context = createContext(null)
+/* import { TabulatorFull as Tabulator } from 'tabulator-tables';
 import './index.css';
 
 var tabledata = [
@@ -40,11 +48,15 @@ table2.on("rowClick", function (e, row) {
 	alert("Строка " + row.getData().id + " выбрана!!!!");
 });
 
-
-ReactDOM.render(
-
-	<App />,
-	document.getElementById('root')
+ */
+root.render(
+	<Context.Provider value={{
+		user: new UserStore(),
+		userProjects: new UserProjectsStore()
+	} }>
+		<App />
+	</Context.Provider>,
+/* 	document.getElementById('root') */
 
 
 );

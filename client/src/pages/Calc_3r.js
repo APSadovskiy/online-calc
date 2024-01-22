@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const Calc_3r = () => {
 	return (
 		<div>
